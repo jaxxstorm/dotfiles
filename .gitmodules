@@ -1,6 +1,9 @@
 [submodule "dotbot"]
 	path = dotbot
-	url = https://github.com/anishathalye/dotbot
+  url = https://github.com/anishathalye/dotbot
+[submodule "bash_it"]
+  path = bash_it
+  url = https://github.com/revans/bash-it.git
 [submodule "vim/bundle/vim-puppet"]
 	path = vim/bundle/vim-puppet
   url = git://github.com/rodjek/vim-puppet.git
