@@ -8,5 +8,5 @@
       path: bash_profile
     ~/.bashrc:
       force: true
-      path: bash_rc
+      path: bashrc
 - shell: []
