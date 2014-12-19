@@ -10,4 +10,7 @@
     ~/.bashrc:
       force: true
       path: bashrc
+    ~/local:
+      force: true
+      path: local    
 - shell: []
