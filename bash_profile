@@ -14,7 +14,7 @@ export BASH_IT=$HOME/.bash_it
 export BASH_IT_THEME='pure'
 
 # Your place for hosting Git repos. I use this for private repos.
-export GIT_HOSTING='git@git.domain.com'
+export GIT_HOSTING='git@bitbucket.org:jaxxstorm/'
 
 # Set my editor and git editor
 export EDITOR="/usr/bin/vim"
