@@ -1,6 +1,7 @@
 - clean: []
 - link:
     ~/.vim: vim/
+    ~/.config/terminator/config: terminator-config
     ~/.gitconfig: gitconfig
     ~/.vimrc: vimrc
     ~/.bash_it: bash_it
@@ -13,4 +14,5 @@
     ~/local:
       force: true
       path: local    
-- shell: []
+- shell: 
+  - [mkdir -p ~/.config/terminator, Creating terminator config directory]
