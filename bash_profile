@@ -11,7 +11,12 @@ export BASH_IT=$HOME/.bash_it
 
 # Lock and Load a custom theme file
 # location /.bash_it/themes/
-export BASH_IT_THEME='pure'
+os=$(uname)
+if [[ $os == 'Darwin' ]]; then
+  export BASH_IT_THEME='sexy'
+else
+  export BASH_IT_THEME='pure'
+fi
 
 # Your place for hosting Git repos. I use this for private repos.
 export GIT_HOSTING='git@bitbucket.org:jaxxstorm/'
