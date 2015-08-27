@@ -13,7 +13,7 @@ export BASH_IT=$HOME/.bash_it
 # location /.bash_it/themes/
 os=$(uname)
 if [[ $os == 'Darwin' ]]; then
-  export BASH_IT_THEME='sexy'
+  export BASH_IT_THEME='envy'
 else
   export BASH_IT_THEME='pure'
 fi
@@ -46,3 +46,5 @@ export TODO="t"
 
 # Load Bash It
 source $BASH_IT/bash_it.sh
+
+alias ls="ls -FG"
