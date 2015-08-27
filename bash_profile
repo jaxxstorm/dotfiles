@@ -3,8 +3,13 @@
 # Load RVM, if you are using it
 [[ -s $HOME/.rvm/scripts/rvm ]] && source $HOME/.rvm/scripts/rvm
 
-# Add rvm gems and nginx to the path
-export PATH=$PATH:~/.gem/ruby/1.8/bin:/opt/nginx/sbin
+# Add rvm gems
+export PATH=$PATH:~/.gem/ruby/1.8/bin
+
+# Add some local path dirs
+export PATH=$HOME/local/bin:$PATH
+export PATH=$HOME/scripts:$PATH
+export PATH=$HOME/bin:$PATH
 
 # Path to the bash it configuration
 export BASH_IT=$HOME/.bash_it
@@ -17,6 +22,9 @@ if [[ $os == 'Darwin' ]]; then
 else
   export BASH_IT_THEME='pure'
 fi
+
+# expand aliases
+shopt -s expand_aliases
 
 # Your place for hosting Git repos. I use this for private repos.
 export GIT_HOSTING='git@bitbucket.org:jaxxstorm/'
@@ -44,7 +52,16 @@ export TODO="t"
 # https://github.com/xvzf/vcprompt
 #export VCPROMPT_EXECUTABLE=~/.vcprompt/bin/vcprompt
 
+# if there's a local copy of git available, use it that
+if [[ -x $HOME/bin/git ]]; then
+  alias git=$HOME/bin/git
+fi
+
+# set the terminal prompt command
+export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}\007"'
+
 # Load Bash It
 source $BASH_IT/bash_it.sh
 
 alias ls="ls -FG"
+=======
