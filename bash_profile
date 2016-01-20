@@ -64,4 +64,3 @@ export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}\007"'
 source $BASH_IT/bash_it.sh
 
 alias ls="ls -FG"
-=======
