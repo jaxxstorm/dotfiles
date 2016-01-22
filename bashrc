@@ -1,6 +1,5 @@
 export PATH=$HOME/local/bin:$PATH
 export PATH=$HOME/scripts:$PATH
-alias ls="ls -FG"
 export PATH=$HOME/bin:$PATH
 alias ls="ls --color"
 # set the terminal prompt command
@@ -14,3 +13,7 @@ source ~/.bash_profile
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+
+### Set up some aliases
+alias gitclean_preview="git branch --merged | grep -v '\*'"
+alias gitclean="git branch --merged | grep -v '\*' | xargs -n 1 git branch -d"

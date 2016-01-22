@@ -63,4 +63,7 @@ export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}\007"'
 # Load Bash It
 source $BASH_IT/bash_it.sh
 
+### Aliases
 alias ls="ls -FG"
+alias gitclean_preview="git branch --merged | grep -v '\*'"
+alias gitclean="git branch --merged | grep -v '\*' | xargs -n 1 git branch -d"
