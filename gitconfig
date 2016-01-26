@@ -6,3 +6,6 @@
 	editor = vim
 [alias]
 	merged = branch --merged
+	co = checkout
+	s = status
+	last = log -1 HEAD

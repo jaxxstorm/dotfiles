@@ -17,3 +17,5 @@ export PATH="/usr/local/heroku/bin:$PATH"
 ### Set up some aliases
 alias gitclean_preview="git branch --merged | grep -v '\*'"
 alias gitclean="git branch --merged | grep -v '\*' | xargs -n 1 git branch -d"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
