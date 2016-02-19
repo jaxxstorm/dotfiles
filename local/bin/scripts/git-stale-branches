@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+GIT_CMD=$(which git)
+
+if ! $(git rev-parse >/dev/null 2>&1)
+then
+  echo "You are not in a git repo, exiting"
+  exit 1
+fi
+
+$GIT_CMD branch --merged | awk {'print($1)}' | egrep -v '(\*|production|master|default)'
