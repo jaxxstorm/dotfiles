@@ -11,6 +11,12 @@
     ~/.bashrc:
       force: true
       path: bashrc
+    ~/.zshrc:
+      force: true
+      path: zshrc
+    ~/.oh-my-zsh:
+      force: true
+      path: oh-my-zsh
     ~/local:
       force: true
       path: local    
