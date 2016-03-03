@@ -193,7 +193,9 @@ prompt_rvm() {
   local rvm_prompt="(`which rvm-prompt`)"
   local rvm_current="(`rvm current`)"
   if [[ -n "$rvm_prompt" && -n "%rvm_current" ]]; then
-    prompt_segment red black "$rvm_current"
+    if [[ "$rvm_current" != "(system)" ]]; then
+      prompt_segment red black "$rvm_current"
+    fi
   fi
 }
 
