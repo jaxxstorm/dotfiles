@@ -17,6 +17,9 @@
     ~/.oh-my-zsh:
       force: true
       path: oh-my-zsh
+    ~/.oh-my-zsh/customizations:
+      force: true
+      path: zsh-customizations
     ~/local:
       force: true
       path: local    
