@@ -1,11 +1,12 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/Lee/.oh-my-zsh
 
+POWERLEVEL9K_MODE='awesome-patched'
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -49,7 +50,7 @@ ZSH_CUSTOM=$ZSH/customizations
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew bash-completion rvm zsh-syntax-highlighting)
+plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting)
 
 # User configuration
 
@@ -83,3 +84,17 @@ export LANG=en_US.UTF-8
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 DEFAULT_USER="Lee"
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('battery' 'dir' 'vcs')
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'time')
+POWERLEVEL9K_RVM_BACKGROUND="red"
+POWERLEVEL9K_RVM_FOREGROUND="black"
+POWERLEVEL9K_SHOW_CHANGESET=true
+POWERLEVEL9K_CHANGESET_HASH_LENGTH=8
+POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_BATTERY_CHARGED="green"
+POWERLEVEL9K_BATTERY_CHARGING="yellow"
+POWERLEVEL9K_BATTERY_LOW_THRESHOLD=15
+POWERLEVEL9K_BATTERY_LOW_COLOR="red"
+
+

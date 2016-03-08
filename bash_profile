@@ -15,7 +15,7 @@ export BASH_IT=$HOME/.bash_it
 # location /.bash_it/themes/
 os=$(uname)
 if [[ $os == 'Darwin' ]]; then
-  export BASH_IT_THEME='envy'
+  export BASH_IT_THEME='pure'
 else
   export BASH_IT_THEME='pure'
 fi
