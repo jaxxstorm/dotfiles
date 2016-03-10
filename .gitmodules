@@ -32,3 +32,6 @@
 [submodule "vim/bundle/vim-livedown"]
 	path = vim/bundle/vim-livedown
 	url = https://github.com/shime/vim-livedown.git
+[submodule "vim/bundle/vim-indent-guides"]
+	path = vim/bundle/vim-indent-guides
+	url = git://github.com/nathanaelkane/vim-indent-guides.git
