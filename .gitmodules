@@ -26,3 +26,9 @@
 [submodule "zsh-customizations/themes/powerlevel9k"]
 	path = zsh-customizations/themes/powerlevel9k
 	url = https://github.com/bhilburn/powerlevel9k.git
+[submodule "vim/bundle/vim-markdown"]
+	path = vim/bundle/vim-markdown
+	url = https://github.com/plasticboy/vim-markdown.git
+[submodule "vim/bundle/vim-livedown"]
+	path = vim/bundle/vim-livedown
+	url = https://github.com/shime/vim-livedown.git
