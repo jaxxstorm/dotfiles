@@ -20,6 +20,9 @@
     ~/.oh-my-zsh/customizations:
       force: true
       path: zsh-customizations
+    ~/.fit_commit.yml:
+      force: true
+      path: fit_commit.yml
     ~/local:
       force: true
       path: local    
