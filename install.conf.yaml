@@ -20,6 +20,8 @@
     ~/.oh-my-zsh/customizations:
       force: true
       path: zsh-customizations
+    ~/.gnupg/gpg-agent.conf:
+      path: gpg-agent
     ~/local:
       force: true
       path: local    
