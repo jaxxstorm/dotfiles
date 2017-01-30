@@ -50,11 +50,14 @@ ZSH_CUSTOM=$ZSH/customizations
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting)
+plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting vi-mode)
 
 # User configuration
 
-export PATH="/Users/Lee/bin:/Users/Lee/scripts:/Users/Lee/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/Lee/.gem/ruby/2.0.0/bin:/Users/Lee/.rvm/bin"
+export PATH="/Users/Lee/bin:/Users/Lee/scripts:/Users/Lee/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/Lee/.gem/ruby/2.0.0/bin:/Users/Lee/.rvm/bin:/usr/local/go/bin"
+
+export GOPATH="/Users/Lee/go"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -86,7 +89,7 @@ export LANG=en_US.UTF-8
 DEFAULT_USER="Lee"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs')
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'time')
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'vi_mode')
 POWERLEVEL9K_RVM_BACKGROUND="red"
 POWERLEVEL9K_RVM_FOREGROUND="black"
 POWERLEVEL9K_SHOW_CHANGESET=true
