@@ -50,13 +50,13 @@ ZSH_CUSTOM=$ZSH/customizations
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting vi-mode)
+plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting virtualenv)
 
 # User configuration
 
-export PATH="/Users/Lee/bin:/Users/Lee/scripts:/Users/Lee/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/Lee/.gem/ruby/2.0.0/bin:/Users/Lee/.rvm/bin:/usr/local/go/bin"
-
 export GOPATH="/Users/Lee/go"
+
+export PATH="/Users/Lee/bin:/Users/Lee/scripts:/Users/Lee/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/Lee/.gem/ruby/2.0.0/bin:/Users/Lee/.rvm/bin:/usr/local/go/bin:$GOPATH/bin"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -88,8 +88,8 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 DEFAULT_USER="Lee"
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs')
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'vi_mode')
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'virtualenv')
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'go_version' 'aws')
 POWERLEVEL9K_RVM_BACKGROUND="red"
 POWERLEVEL9K_RVM_FOREGROUND="black"
 POWERLEVEL9K_SHOW_CHANGESET=true
@@ -106,3 +106,9 @@ POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 
 unsetopt correct_all  
 setopt correct
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/Lee/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/Lee/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/Lee/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/Lee/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
