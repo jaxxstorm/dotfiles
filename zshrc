@@ -50,7 +50,7 @@ ZSH_CUSTOM=$ZSH/customizations
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting virtualenv)
+plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting virtualenv kubernetes)
 
 # User configuration
 
@@ -89,12 +89,12 @@ export LANG=en_US.UTF-8
 DEFAULT_USER="Lee"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'virtualenv')
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'go_version' 'aws')
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'go_version' 'aws' 'kubecontext')
 POWERLEVEL9K_RVM_BACKGROUND="red"
 POWERLEVEL9K_RVM_FOREGROUND="black"
 POWERLEVEL9K_SHOW_CHANGESET=true
 POWERLEVEL9K_CHANGESET_HASH_LENGTH=8
-POWERLEVEL9K_MODE='awesome-patched'
+POWERLEVEL9K_MODE='compatible'
 POWERLEVEL9K_BATTERY_CHARGED="green"
 POWERLEVEL9K_BATTERY_CHARGING="yellow"
 POWERLEVEL9K_BATTERY_LOW_THRESHOLD=15

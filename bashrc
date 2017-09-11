@@ -1,4 +1,4 @@
-export PATH=$HOME/local/bin:$PATH
+.bash_profileexport PATH=$HOME/local/bin:$PATH
 export PATH=$HOME/scripts:$PATH
 export PATH=$HOME/bin:$PATH
 alias ls="ls --color"
