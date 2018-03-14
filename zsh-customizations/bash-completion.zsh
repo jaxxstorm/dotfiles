@@ -2,6 +2,6 @@
 autoload bashcompinit
 bashcompinit
 
-for file in $ZSH/customizations/bash-completions/*; do
+for file in $HOME/.zsh/customizations/bash-completions/*; do
   source "$file"
 done
