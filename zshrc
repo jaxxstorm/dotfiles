@@ -44,13 +44,13 @@ ENABLE_CORRECTION="true"
 # HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
-ZSH_CUSTOM=$ZSH/customizations
+ZSH_CUSTOM=$HOME/.zsh/customizations
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting virtualenv kubernetes)
+plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting virtualenv kubectl)
 
 # User configuration
 
@@ -112,3 +112,7 @@ if [ -f '/Users/Lee/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Us
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/Lee/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/Lee/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+#export PATH="/usr/local/opt/curl/bin:$PATH"
+eval $(thefuck --alias)
