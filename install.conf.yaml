@@ -17,7 +17,7 @@
     ~/.oh-my-zsh:
       force: true
       path: oh-my-zsh
-    ~/.oh-my-zsh/customizations:
+    ~/.zsh/customizations:
       force: true
       path: zsh-customizations
     ~/.gnupg/gpg-agent.conf:
