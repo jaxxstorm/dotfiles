@@ -3,7 +3,7 @@
 	email = lbriggs@apptio.com
 	signingkey = 7E665533
 [core]
-  excludesfile = ~/.gitignore_global
+	excludesfile = /Users/Lee/.gitignore_global
 	editor = vim
 [alias]
 	co = checkout

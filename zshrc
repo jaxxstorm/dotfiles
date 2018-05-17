@@ -46,6 +46,8 @@ ENABLE_CORRECTION="true"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zsh/customizations
 
+source $ZSH_CUSTOM/gtm-plugin.sh
+
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -88,7 +90,7 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 DEFAULT_USER="Lee"
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'virtualenv')
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'virtualenv' 'watson')
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'go_version' 'aws' 'kubecontext')
 POWERLEVEL9K_RVM_BACKGROUND="red"
 POWERLEVEL9K_RVM_FOREGROUND="black"

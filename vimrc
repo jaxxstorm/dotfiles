@@ -12,6 +12,7 @@ let g:solarized_termtrans=1
 colorscheme solarized
 let g:vim_markdown_folding_disabled = 1
 let g:rspec_runner = "os_x_iterm2"
+let g:gtm_plugin_status_enabled = 1
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>
