@@ -58,7 +58,7 @@ plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting virtualenv
 
 export GOPATH="/Users/Lee/go"
 
-export PATH="/Users/Lee/bin:/Users/Lee/scripts:/Users/Lee/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/Lee/.gem/ruby/2.0.0/bin:/Users/Lee/.rvm/bin:/usr/local/go/bin:$GOPATH/bin"
+export PATH="/Users/Lee/bin:/Users/Lee/scripts:/Users/Lee/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/Lee/.gem/ruby/2.0.0/bin:/Users/Lee/.rvm/bin:/usr/local/go/bin:$GOPATH/bin:/Users/Lee/Library/Python/3.6/bin/"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -90,7 +90,7 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 DEFAULT_USER="Lee"
 
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'virtualenv' 'watson')
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'virtualenv')
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'go_version' 'aws' 'kubecontext')
 POWERLEVEL9K_RVM_BACKGROUND="red"
 POWERLEVEL9K_RVM_FOREGROUND="black"
@@ -104,17 +104,22 @@ POWERLEVEL9K_BATTERY_LOW_COLOR="red"
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_middle"
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
 
+AWS_DEFAULT_PROFILE="engineering"
+
 #POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 
 unsetopt correct_all  
 setopt correct
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/Lee/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/Lee/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/Lee/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/Lee/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 
 #export PATH="/usr/local/opt/curl/bin:$PATH"
 eval $(thefuck --alias)
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/Lee/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/Lee/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/Lee/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/Lee/google-cloud-sdk/completion.zsh.inc'; fi
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

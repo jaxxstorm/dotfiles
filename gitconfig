@@ -1,7 +1,7 @@
 [user]
 	name = Lee Briggs
 	email = lbriggs@apptio.com
-	signingkey = 7E665533
+	signingkey = A4D09B96FDFEB505
 [core]
 	excludesfile = /Users/Lee/.gitignore_global
 	editor = vim
@@ -31,3 +31,5 @@
 	newHighlight = green bold 22
 [commit]
 	gpgsign = true
+[gpg]
+	program = gpg

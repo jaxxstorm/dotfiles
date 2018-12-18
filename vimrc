@@ -3,7 +3,7 @@ filetype plugin indent on
 syntax enable
 set background=dark
 set expandtab
-set tabstop=2 shiftwidth=2 expandtab
+set tabstop=2 shiftwidth=2
 set backspace=indent,eol,start
 let mapleader = "-"
 let g:solarized_visibility="normal"
@@ -13,6 +13,7 @@ colorscheme solarized
 let g:vim_markdown_folding_disabled = 1
 let g:rspec_runner = "os_x_iterm2"
 let g:gtm_plugin_status_enabled = 1
+let g:jsonnet_fmt_options = '-n 0'
 " RSpec.vim mappings
 map <Leader>t :call RunCurrentSpecFile()<CR>
 map <Leader>s :call RunNearestSpec()<CR>

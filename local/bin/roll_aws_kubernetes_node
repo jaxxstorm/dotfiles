@@ -1,0 +1,50 @@
+#!/bin/bash
+usage() 
+{ 
+  echo "Usage: $0 [-n <KUBERNETES_NODE] " 1>&2
+  exit 1
+}
+
+while getopts ":n:" o; do
+    case "${o}" in
+        n)
+            n=${OPTARG}
+            ;;
+        *)
+            usage
+            ;;
+    esac
+done
+shift $((OPTIND-1))
+
+if [ -z "${n}" ]; then
+    usage
+fi
+
+if [ -z "${AWS_PROFILE}" ]; then
+  echo "Not AWS Profile set - you probably don't want to continue"
+  exit 1
+fi
+
+echo "operating on node: ${n}" | ts '[%Y-%m-%d %H:%M:%S]'
+echo "draining node: ${n}" | ts '[%Y-%m-%d %H:%M:%S]'
+kubectl drain ${n} --delete-local-data --ignore-daemonsets | ts '[%Y-%m-%d %H:%M:%S]'
+
+echo "finding AWS node: ${n} in AWS profile: ${AWS_PROFILE}"
+
+AWS_NODE_NAME=$(aws ec2 describe-instances --filters "Name=private-dns-name,Values=${n}" | jq '.Reservations[].Instances[].InstanceId' -r)
+if [ -z "${AWS_NODE_NAME}" ]; then
+  echo "Could not find AWS node in profile ${AWS_PROFILE}" | ts '[%Y-%m-%d %H:%M:%S]'
+  exit 1
+fi
+
+echo "found AWS node ${AWS_NODE_NAME}" | ts '[%Y-%m-%d %H:%M:%S]'
+
+echo "terminating node ${AWS_NODE_NAME}" | ts '[%Y-%m-%d %H:%M:%S]'
+
+aws ec2 terminate-instances --instance-ids ${AWS_NODE_NAME}
+
+echo "Complete!" | ts '[%Y-%m-%d %H:%M:%S]'
+
+
+
