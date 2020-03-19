@@ -7,3 +7,7 @@ function json2yaml() {
 function yaml2json() {
   yq r -j $1
 }
+
+function sortyaml() {
+  yq r --tojson $1 | jq . | yq r -
+}

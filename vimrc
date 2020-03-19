@@ -6,7 +6,8 @@ set expandtab
 set tabstop=2 shiftwidth=2
 set backspace=indent,eol,start
 let mapleader = "-"
-let g:solarized_visibility="normal"
+let g:solarized_visibility="low"
+let g:solarized_contrast = "high"
 let g:solarized_termcolors=256
 let g:solarized_termtrans=1
 colorscheme solarized

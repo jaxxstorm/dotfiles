@@ -1,10 +1,11 @@
 [user]
 	name = Lee Briggs
 	email = lbriggs@apptio.com
-	signingkey = A4D09B96FDFEB505
+	signingkey = D8B8A688AC254837
 [core]
-	excludesfile = /Users/Lee/.gitignore_global
+	excludesfile = /Users/lbriggs/.gitignore_global
 	editor = vim
+	pager = delta --dark
 [alias]
 	co = checkout
 	s = status
@@ -19,11 +20,12 @@
 	sprout = !legit sprout
 	sync = !legit sync
 	switch = !legit switch
-	resync = !legit resync
-[pager]
-  diff = diff-so-fancy | less --tabs=1,5 -RFX
-  show = diff-so-fancy | less --tabs=1,5 -RFX
-  grep = diff-so-fancy | less --tabs=1,5 -RFX
+  resync = !legit resync
+  c = cz
+#[pager]
+  #diff = diff-so-fancy | less --tabs=1,5 -RFX
+  #show = diff-so-fancy | less --tabs=1,5 -RFX
+  #grep = diff-so-fancy | less --tabs=1,5 -RFX
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52

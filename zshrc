@@ -1,12 +1,13 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/Lee/.oh-my-zsh
+export ZSH=/Users/lbriggs/.oh-my-zsh
+source /usr/local/opt/powerlevel9k/powerlevel9k.zsh-theme
 
 POWERLEVEL9K_MODE='awesome-patched'
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="powerlevel9k/powerlevel9k"
+#ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -46,20 +47,18 @@ ENABLE_CORRECTION="true"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zsh/customizations
 
-source $ZSH_CUSTOM/gtm-plugin.sh
-
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting virtualenv kubectl)
+plugins=(git battery brew bash-completion rvm zsh-syntax-highlighting virtualenv kubectl gpg pyenv)
 
 # User configuration
 
-export GOPATH="/Users/Lee/go"
+export GOPATH="${HOME}/src/go"
+export PATH="/Users/lbriggs/bin:/Users/lbriggs/scripts:/Users/lbriggs/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/lbriggs/.gem/ruby/2.0.0/bin:/Users/lbriggs/.rvm/bin:/usr/local/go/bin:$GOPATH/bin:/Users/lbriggs/Library/Python/3.6/bin/:/opt/puppetlabs/bin:$HOME/.jenv/bin:$HOME/.poetry/bin"
 
-export PATH="/Users/Lee/bin:/Users/Lee/scripts:/Users/Lee/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/Lee/.gem/ruby/2.0.0/bin:/Users/Lee/.rvm/bin:/usr/local/go/bin:$GOPATH/bin:/Users/Lee/Library/Python/3.6/bin/"
-
+eval "$(jenv init -)"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 source $ZSH/oh-my-zsh.sh
@@ -88,7 +87,7 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-DEFAULT_USER="Lee"
+DEFAULT_USER="lbriggs"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'virtualenv')
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('rvm' 'status' 'go_version' 'aws' 'kubecontext')
@@ -112,14 +111,22 @@ unsetopt correct_all
 setopt correct
 
 
-#export PATH="/usr/local/opt/curl/bin:$PATH"
-eval $(thefuck --alias)
-
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/Lee/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/Lee/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/lbriggs/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/lbriggs/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/Lee/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/Lee/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/lbriggs/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/lbriggs/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+
+alias go=richgo
+export PATH="/usr/local/opt/gettext/bin:$PATH"
+
+# added by travis gem
+[ -f /Users/lbriggs/.travis/travis.sh ] && source /Users/lbriggs/.travis/travis.sh
+
+#AWSume alias to source the AWSume script
+alias awsume=". \$(pyenv which awsume)"
+fpath=(/usr/local/share/zsh/site-functions $fpath)

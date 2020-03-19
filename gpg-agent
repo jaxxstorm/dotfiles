@@ -1,4 +1,6 @@
 # Cache settings (cache for 3 hours)
+use-standard-socket
+
 max-cache-ttl 7200
 default-cache-ttl 7200
 max-cache-ttl-ssh 7200
@@ -6,4 +8,4 @@ default-cache-ttl-ssh 720
 
 pinentry-program /usr/local/bin/pinentry-mac
 
-write-env-file /Users/Lee/.gnupg/gpg-agent.env
+write-env-file /Users/lbriggs/.gnupg/gpg-agent.env
