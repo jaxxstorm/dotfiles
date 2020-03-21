@@ -1,0 +1,21 @@
+[user]
+	name = Lee Briggs
+	email = lee@leebriggs.co.uk
+	signingkey = A4D09B96FDFEB505
+[core]
+	excludesfile = /Users/lbriggs/.gitignore_global
+	editor = vim
+	pager = delta --dark
+[alias]
+	co = checkout
+	s = status
+  	last = log -1 HEAD
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[commit]
+	gpgsign = true
+[gpg]
+	program = gpg
