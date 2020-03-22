@@ -5,6 +5,7 @@ A repo for my dotfiles. It's managed by [rcm](https://thoughtbot.github.io/rcm/)
 # Installing
 
   - Install [homebrew](https://brew.sh/)
+  - Install oh-my-zsh
   - Clone this repo
   - Install all the dependencies using `brew bundle`
   - Install the config `rcup -d $PATH_TO_REPO`
