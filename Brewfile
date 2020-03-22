@@ -16,6 +16,7 @@ brew "vim"
 brew "speedtest"
 brew "exa"
 brew "awscli"
+brew "pre-commit"
 
 cask "dotnet-sdk"
 cask "visual-studio-code"
