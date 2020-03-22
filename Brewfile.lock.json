@@ -333,6 +333,12 @@
         "options": {
           "full_name": "docker"
         }
+      },
+      "font-jetbrainsmono-nerd-font-mono": {
+        "version": "2.1.0",
+        "options": {
+          "full_name": "font-jetbrainsmono-nerd-font-mono"
+        }
       }
     },
     "mas": {
@@ -364,7 +370,7 @@
       "catalina": {
         "HOMEBREW_VERSION": "2.2.10",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "7ae32dc9c1ab3268af40d23522d37d648b46a440",
+        "Homebrew/homebrew-core": "d69912d55f9f0b653a3aadd99f862494d4efce99",
         "CLT": "11.0.33.17",
         "Xcode": "11.3",
         "macOS": "10.15.3"

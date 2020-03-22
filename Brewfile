@@ -20,6 +20,7 @@ brew "awscli"
 cask "dotnet-sdk"
 cask "visual-studio-code"
 cask "docker"
+cask "font-jetbrainsmono-nerd-font-mono"
 
 mas "Enpass", id: 732710998
 mas "Slack", id: 803453959
