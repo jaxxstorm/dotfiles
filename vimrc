@@ -1,24 +1,28 @@
-execute pathogen#infect()
-filetype plugin indent on
-syntax enable
-set background=dark
-set expandtab
-set tabstop=2 shiftwidth=2
-set backspace=indent,eol,start
-let mapleader = "-"
-let g:solarized_visibility="low"
-let g:solarized_contrast = "high"
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-colorscheme solarized
-let g:vim_markdown_folding_disabled = 1
-let g:rspec_runner = "os_x_iterm2"
-let g:gtm_plugin_status_enabled = 1
-let g:jsonnet_fmt_options = '-n 0'
-" RSpec.vim mappings
-map <Leader>t :call RunCurrentSpecFile()<CR>
-map <Leader>s :call RunNearestSpec()<CR>
-map <Leader>l :call RunLastSpec()<CR>
-map <Leader>a :call RunAllSpecs()<CR>
-map <Leader>r :Rake test<CR>
+set nocompatible              " be iMproved, required
+filetype off                  " required
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+" plugins go here
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'bfontaine/Brewfile.vim'
+Plugin 'fatih/vim-go'
+Plugin 'numirias/semshi'
+Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+syntax on " Enable syntax highlightin
+filetype on " Enable filetype detection
+filetype plugin indent on    " required
+filetype plugin on " Enable filetype-specific plugins
+
+
 

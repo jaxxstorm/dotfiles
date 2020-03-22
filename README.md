@@ -1,30 +1,18 @@
-# Personal dotfiles
+# Dotfiles
 
-## Installation
+A repo for my dotfiles. It's managed by [rcm](https://thoughtbot.github.io/rcm/)
 
-### CentOS 6 Specific 
+# Installing
 
-You need python-argparse install
+  - Install [homebrew](https://brew.sh/)
+  - Clone this repo
+  - Install all the dependencies using `brew bundle`
+  - Install the config `rcup -d $PATH_TO_REPO`
 
-```
-yum install python-argparse
-```
+# Adding new config
 
-Should be okay on Ubuntu and OS X
-
-Then do
-
-```
-git clone --recursive
-bash install
-```
-
-## Adding files
-
-There's lots of submodules here, need to make sure they're tracked.
-
-To add a new submodule do:
+The easiest way is to modify your config file as needed, and then do
 
 ```
-git submodule add <gitrepo>
+mkdrc <path>
 ```

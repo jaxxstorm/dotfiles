@@ -1,7 +1,7 @@
 [user]
 	name = Lee Briggs
-	email = lbriggs@apptio.com
-	signingkey = D8B8A688AC254837
+	email = lee@leebriggs.co.uk
+	signingkey = A4D09B96FDFEB505
 [core]
 	excludesfile = /Users/lbriggs/.gitignore_global
 	editor = vim
@@ -9,23 +9,7 @@
 [alias]
 	co = checkout
 	s = status
-  last = log -1 HEAD
-  cleanpre = !gitclean_preview
-  cleanup = !gitclean
-	branches = !legit branches
-	graft = !legit graft
-	harvest = !legit harvest
-	publish = !legit publish
-	unpublish = !legit unpublish
-	sprout = !legit sprout
-	sync = !legit sync
-	switch = !legit switch
-  resync = !legit resync
-  c = cz
-#[pager]
-  #diff = diff-so-fancy | less --tabs=1,5 -RFX
-  #show = diff-so-fancy | less --tabs=1,5 -RFX
-  #grep = diff-so-fancy | less --tabs=1,5 -RFX
+  	last = log -1 HEAD
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
