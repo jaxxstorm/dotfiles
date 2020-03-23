@@ -20,7 +20,7 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ssh-agent aws pyenv vundle)
+plugins=(git ssh-agent aws pyenv vundle kubectl virtualenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -28,8 +28,8 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 # User configuration
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'aws')
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('pyenv')
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'aws' 'virtualenv')
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('pyenv' 'kubecontext')
 POWERLEVEL9K_RVM_BACKGROUND="red"
 POWERLEVEL9K_RVM_FOREGROUND="black"
 POWERLEVEL9K_SHOW_CHANGESET=true

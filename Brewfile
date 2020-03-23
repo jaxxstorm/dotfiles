@@ -1,5 +1,6 @@
 tap "thoughtbot/formulae"
 tap "teamookla/speedtest"
+tap "golangci/tap"
 
 brew "rcm"
 brew "mas"
@@ -17,6 +18,13 @@ brew "speedtest"
 brew "exa"
 brew "awscli"
 brew "pre-commit"
+brew "pandoc"
+brew "yarn"
+brew "golangci-lint"
+brew "gron"
+brew "jq"
+brew "kubectl"
+brew "helm"
 
 cask "dotnet-sdk"
 cask "visual-studio-code"
@@ -29,3 +37,4 @@ mas "Magnet", id: 441258766
 mas "Lightshot Screenshot", id: 526298438
 mas "Spark", id: 1176895641
 mas "MyPoint", id: 518658487
+mas "Living Earth Desktop", id: 539362919
