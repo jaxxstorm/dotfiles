@@ -25,6 +25,7 @@ brew "gron"
 brew "jq"
 brew "kubectl"
 brew "helm"
+brew "bat"
 
 cask "dotnet-sdk"
 cask "visual-studio-code"
