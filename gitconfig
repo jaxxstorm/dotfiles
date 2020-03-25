@@ -3,7 +3,7 @@
 	email = lee@leebriggs.co.uk
 	signingkey = A4D09B96FDFEB505
 [core]
-	excludesfile = /Users/lbriggs/.gitignore_global
+	excludesfile = /Users/lbriggs/.gitignore
 	editor = vim
 	pager = delta --dark
 [alias]

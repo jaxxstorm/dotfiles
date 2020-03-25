@@ -8,6 +8,7 @@ brew "pinentry-mac"
 brew "git-delta"
 brew "pyenv"
 brew "node"
+brew "go@1.13"
 brew "go"
 brew "pulumi"
 brew "gnupg"
@@ -26,6 +27,9 @@ brew "jq"
 brew "kubectl"
 brew "helm"
 brew "bat"
+brew "pipenv"
+brew "dep", args: ["ignore-dependencies"]
+brew "goenv", args: [ "HEAD" ]
 
 cask "dotnet-sdk"
 cask "visual-studio-code"
