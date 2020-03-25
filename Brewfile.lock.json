@@ -498,7 +498,7 @@
       },
       "Slack": {
         "id": "803453959",
-        "version": "4.4.0"
+        "version": "4.4.1"
       },
       "Magnet": {
         "id": "441258766",
@@ -516,6 +516,10 @@
       "Living Earth Desktop": {
         "id": "539362919",
         "version": "1.25"
+      },
+      "Todoist": {
+        "id": "585829637",
+        "version": "7.2.6"
       }
     }
   },

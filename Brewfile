@@ -39,3 +39,4 @@ mas "Lightshot Screenshot", id: 526298438
 mas "Spark", id: 1176895641
 mas "MyPoint", id: 518658487
 mas "Living Earth Desktop", id: 539362919
+mas "Todoist", id: 585829637
