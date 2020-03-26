@@ -1,6 +1,7 @@
 tap "thoughtbot/formulae"
 tap "teamookla/speedtest"
 tap "golangci/tap"
+tap "jaxxstorm/tap"
 
 brew "rcm"
 brew "mas"
@@ -30,6 +31,7 @@ brew "bat"
 brew "pipenv"
 brew "dep", args: ["ignore-dependencies"]
 brew "goenv", args: [ "HEAD" ]
+brew "change-aws-credentials"
 
 cask "dotnet-sdk"
 cask "visual-studio-code"

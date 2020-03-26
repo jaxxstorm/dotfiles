@@ -9,6 +9,9 @@
       },
       "golangci/tap": {
         "revision": "e77a41664ffb924373aaf569dae5fba3d8765ae0"
+      },
+      "jaxxstorm/tap": {
+        "revision": "6b76556fd6c3e53558c75091d4d93499f9fa1b52"
       }
     },
     "brew": {
@@ -544,6 +547,10 @@
             }
           }
         }
+      },
+      "change-aws-credentials": {
+        "version": "0.3.3",
+        "bottle": false
       }
     },
     "cask": {
