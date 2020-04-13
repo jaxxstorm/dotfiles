@@ -15,7 +15,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'bfontaine/Brewfile.vim'
 Plugin 'fatih/vim-go'
-Plugin 'numirias/semshi'
+" Plugin 'numirias/semshi'
 Plugin 'pangloss/vim-javascript'
 Plugin 'leafgarland/typescript-vim'
 
@@ -26,6 +26,7 @@ syntax on " Enable syntax highlightin
 filetype on " Enable filetype detection
 filetype plugin indent on    " required
 filetype plugin on " Enable filetype-specific plugins
+set tabstop=4 softtabstop=0 expandtab shiftwidth=4 smarttab
 
 
 

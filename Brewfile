@@ -10,7 +10,6 @@ brew "git-delta"
 brew "pyenv"
 brew "node"
 brew "go@1.13"
-brew "go"
 brew "pulumi"
 brew "gnupg"
 brew "git"
@@ -30,13 +29,15 @@ brew "helm"
 brew "bat"
 brew "pipenv"
 brew "dep", args: ["ignore-dependencies"]
-brew "goenv", args: [ "HEAD" ]
 brew "change-aws-credentials"
+brew "azure-cli"
+brew "hub"
 
 cask "dotnet-sdk"
 cask "visual-studio-code"
 cask "docker"
 cask "font-jetbrainsmono-nerd-font-mono"
+cask "google-cloud-sdk"
 
 mas "Enpass", id: 732710998
 mas "Slack", id: 803453959

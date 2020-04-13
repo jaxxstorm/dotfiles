@@ -20,15 +20,22 @@ ENABLE_CORRECTION="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git ssh-agent aws pyenv vundle kubectl virtualenv)
+plugins=(git ssh-agent aws pyenv vundle kubectl virtualenv gcloud)
 
 source $ZSH/oh-my-zsh.sh
+
+# Gcloud
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
 
+export GOPATH=$HOME/src/go
+export PATH=$PATH:$GOPATH/bin:/usr/local/opt/go@1.13/bin
+
 # User configuration
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'aws' 'virtualenv')
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=('dir' 'vcs' 'aws' 'virtualenv' 'gcloud')
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=('pyenv' 'kubecontext')
 POWERLEVEL9K_RVM_BACKGROUND="red"
 POWERLEVEL9K_RVM_FOREGROUND="black"
