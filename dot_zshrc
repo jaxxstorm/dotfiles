@@ -5,14 +5,18 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
 COMPLETION_WAITING_DOTS="true"
 
-source $ZSH/oh-my-zsh.sh
+if [ -r "$ZSH/oh-my-zsh.sh" ]; then
+  source "$ZSH/oh-my-zsh.sh"
+fi
 
 plugins=(git ssh-agent aws)
 
-export PATH="$HOME/.cargo/bin:$HOME/.tfenv/bin:$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:/opt/homebrew/bin:/opt/homebrew/lib/ruby/gems/3.1.0/bin:/opt/homebrew/opt/ruby/bin:$PATH"
+export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$HOME/.tfenv/bin:$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:/opt/homebrew/bin:/opt/homebrew/lib/ruby/gems/3.1.0/bin:/opt/homebrew/opt/ruby/bin:$PATH"
 
 # Starship
-eval "$(starship init zsh)"
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+fi
 
 # awsp
 alias awsp="source _awsp"
@@ -22,6 +26,14 @@ alias awsp="source _awsp"
 export GPG_TTY=$(tty)
 gpgconf --launch gpg-agent
 
-export KUBECONFIG=KUBECONFIG:$(echo $(ls ~/.kube/config.d/*) | sed 's/ /:/g')
+if [ -d "$HOME/.kube/config.d" ]; then
+  kube_configs=("$HOME"/.kube/config.d/*(N))
+  if [ ${#kube_configs[@]} -gt 0 ]; then
+    export KUBECONFIG="${KUBECONFIG:+$KUBECONFIG:}${(j/:/)kube_configs}"
+  fi
+fi
+
 export EDITOR=vim
-eval "$(/Users/lbriggs/.local/bin/mise activate zsh)"
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+fi
