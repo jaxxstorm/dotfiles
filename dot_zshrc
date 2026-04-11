@@ -24,7 +24,9 @@ alias awsp="source _awsp"
 # GPG
 # Add the following to your shell init to set up gpg-agent automatically for every shell
 export GPG_TTY=$(tty)
-gpgconf --launch gpg-agent
+if command -v gpgconf >/dev/null 2>&1; then
+  gpgconf --launch gpg-agent >/dev/null 2>&1 || true
+fi
 
 if [ -d "$HOME/.kube/config.d" ]; then
   kube_configs=("$HOME"/.kube/config.d/*(N))

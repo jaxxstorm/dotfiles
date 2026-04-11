@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+mkdir -p "$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
+
 SUDO=""
 if [ "$(id -u)" -ne 0 ] && command -v sudo >/dev/null 2>&1; then
   SUDO="sudo"
@@ -11,6 +14,11 @@ fi
 if ! command -v brew >/dev/null 2>&1; then
   NONINTERACTIVE=1 /bin/bash -c \
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Install GnuPG and macOS pinentry support if missing.
+if ! command -v gpgconf >/dev/null 2>&1; then
+  brew install gnupg pinentry-mac
 fi
 {{- end }}
 
@@ -35,14 +43,35 @@ if ! command -v zsh >/dev/null 2>&1; then
     exit 1
   fi
 fi
+
+# Install GnuPG and pinentry on Linux if missing.
+if ! command -v gpgconf >/dev/null 2>&1; then
+  if command -v apt-get >/dev/null 2>&1; then
+    $SUDO apt-get update
+    $SUDO apt-get install -y gnupg2 pinentry-curses
+  elif command -v dnf >/dev/null 2>&1; then
+    $SUDO dnf install -y gnupg2 pinentry
+  elif command -v yum >/dev/null 2>&1; then
+    $SUDO yum install -y gnupg2 pinentry
+  elif command -v pacman >/dev/null 2>&1; then
+    $SUDO pacman -Sy --noconfirm gnupg pinentry
+  elif command -v apk >/dev/null 2>&1; then
+    $SUDO apk add --no-cache gnupg pinentry
+  elif command -v zypper >/dev/null 2>&1; then
+    $SUDO zypper --non-interactive install gpg2 pinentry
+  else
+    echo "Unable to install GnuPG automatically: unsupported package manager." >&2
+    exit 1
+  fi
+fi
 {{- end }}
 
 # Install mise if missing.
 if ! command -v mise >/dev/null 2>&1; then
-  curl https://mise.run | sh
+  curl -fsSL https://mise.run | sh
 fi
 
 # Install Starship if missing.
 if ! command -v starship >/dev/null 2>&1; then
-  curl -sS https://starship.rs/install.sh | sh
+  curl -fsSL https://starship.rs/install.sh | sh -s -- -y -b "$HOME/.local/bin"
 fi
