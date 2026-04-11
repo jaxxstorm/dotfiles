@@ -1,0 +1,35 @@
+schema: spec-driven
+context: |
+  Repository: chezmoi dotfiles and bootstrap setup for Lee Briggs (jaxxstorm).
+  Purpose: provide a one-stop setup for new machines across macOS and Linux.
+  Primary implementation patterns:
+  - Use chezmoi-managed dotfiles and templates.
+  - Keep bootstrap logic in shell scripts simple, readable, and safe to rerun.
+  - Prefer portable shell where practical; isolate OS-specific behavior with chezmoi templating or explicit platform checks.
+  - Preserve the existing setup flow unless a change clearly improves reliability or maintainability.
+
+  Security requirements:
+  - Never commit secrets in plaintext.
+  - Do not introduce tokens, keys, passwords, private certificates, or machine-specific secret material into tracked files.
+  - Prefer references to external secret managers, encrypted inputs, environment variables, or user-provided local state.
+
+  Change expectations:
+  - Favor idempotent changes that are safe on fresh machines and safe to rerun on existing machines.
+  - Keep setup non-interactive where possible, especially during bootstrap.
+  - Document any manual follow-up only when automation is not practical.
+  - Assume this repo may need to behave correctly on both macOS and Linux unless the change is explicitly platform-specific.
+
+rules:
+  proposal:
+    - State whether the change applies to macOS, Linux, or both.
+    - Explain how the change affects bootstrap, shell setup, or dotfile management.
+    - Call out idempotency expectations and any rerun risks.
+    - Include a short security note confirming that no plaintext secrets are introduced.
+  spec:
+    - Define expected behavior for fresh-machine setup and rerun behavior.
+    - Be explicit about platform-specific branches, conditions, or templates.
+    - Note any files, scripts, or generated dotfiles affected by the change.
+  tasks:
+    - Include validation for macOS and Linux when the change is cross-platform.
+    - Add checks that confirm the change is safe to rerun.
+    - Include a review step that verifies no plaintext secrets are added to tracked files.
