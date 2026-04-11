@@ -2,4 +2,5 @@
 age = "latest"
 fnox = "latest"
 go = "latest"
+node = "latest"
 python = "3.11"
