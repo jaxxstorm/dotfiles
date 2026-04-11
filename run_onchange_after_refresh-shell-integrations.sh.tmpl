@@ -1,6 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+if ! command -v zsh >/dev/null 2>&1; then
+  echo "zsh is required before installing Oh My Zsh." >&2
+  exit 1
+fi
+
 # Ensure the shell framework expected by dot_zshrc exists.
 if [ ! -d "$HOME/.oh-my-zsh" ]; then
   RUNZSH=no CHSH=yes KEEP_ZSHRC=yes \
