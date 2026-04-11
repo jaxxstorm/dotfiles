@@ -1,0 +1,64 @@
+{{- $gpgPath := lookPath "gpg" -}}
+{{- $signingKey := "" -}}
+{{- if $gpgPath -}}
+{{- $gpgOutput := output "sh" "-c" (printf "%s --list-keys --with-colons lee@leebriggs.co.uk 2>/dev/null || true" $gpgPath) -}}
+{{- range splitList "\n" $gpgOutput -}}
+{{- if and (eq $signingKey "") (hasPrefix "fpr:" .) -}}
+{{- $fields := splitList ":" . -}}
+{{- if ge (len $fields) 10 -}}
+{{- $signingKey = index $fields 9 -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+[user]
+	name = Lee Briggs
+	email = lee@leebriggs.co.uk
+{{- if $signingKey }}
+	signingkey = {{ $signingKey }}
+{{- end }}
+[core]
+	excludesfile = {{ joinPath .chezmoi.homeDir ".gitignore" }}
+	editor = vim
+	pager = delta --dark
+[alias]
+	co = checkout
+	s = status
+	cl = clone
+	last = log -1 HEAD
+	br = branch
+	nb = switch -c
+	cm = commit -m
+	cma = commit -am
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[commit]
+	gpgsign = true
+	verbose = true
+{{- if $gpgPath }}
+[gpg]
+	program = {{ $gpgPath }}
+{{- end }}
+[init]
+	defaultBranch = main
+[delta]
+	line-numbers = false
+	side-by-side = true
+[merge]
+	conflictstyle = zdiff3
+[rerere]
+	enabled = true
+[help]
+	autocorrect = 10
+[diff]
+	algorithm = histogram
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[format]
+	signoff = true
