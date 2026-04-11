@@ -1,5 +1,6 @@
 format = """
-[](#9A348E)\
+[](fg:#3A86FF)\
+$hostname\
 $username\
 [](bg:#DA627D fg:#9A348E)\
 $directory\
@@ -37,6 +38,11 @@ show_always = true
 style_user = "bg:#9A348E"
 style_root = "bg:#9A348E"
 format = '[$user ]($style)'
+
+[hostname]
+ssh_only = true
+trim_at = "."
+format = "[ $hostname ](bg:#3A86FF fg:#ffffff)"
 
 [directory]
 style = "bg:#DA627D"
