@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+export PATH="$HOME/.local/bin:$PATH"
+MISE_BIN="${HOME}/.local/bin/mise"
+MISE_CONFIG="${HOME}/.config/mise/config.toml"
+
+if [ ! -x "$MISE_BIN" ] && ! command -v mise >/dev/null 2>&1; then
+  echo "mise is not installed; skipping tool installation." >&2
+  exit 0
+fi
+
+if [ ! -f "$MISE_CONFIG" ]; then
+  exit 0
+fi
+
+"${MISE_BIN}" install
