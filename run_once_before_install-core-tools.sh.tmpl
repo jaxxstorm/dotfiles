@@ -13,3 +13,8 @@ fi
 if ! command -v mise >/dev/null 2>&1; then
   curl https://mise.run | sh
 fi
+
+# Install Starship if missing.
+if ! command -v starship >/dev/null 2>&1; then
+  curl -sS https://starship.rs/install.sh | sh
+fi
