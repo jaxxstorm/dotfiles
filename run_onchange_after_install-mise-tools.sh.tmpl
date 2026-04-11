@@ -1,8 +1,14 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Re-run this hook whenever the tracked global mise config changes.
+# mise config sha256: {{ include "dot_config/mise/config.toml" | sha256sum }}
+
 export PATH="$HOME/.local/bin:$PATH"
-MISE_BIN="${HOME}/.local/bin/mise"
+MISE_BIN="$(command -v mise || true)"
+if [ -z "$MISE_BIN" ]; then
+  MISE_BIN="${HOME}/.local/bin/mise"
+fi
 MISE_CONFIG="${HOME}/.config/mise/config.toml"
 
 if [ ! -x "$MISE_BIN" ] && ! command -v mise >/dev/null 2>&1; then
