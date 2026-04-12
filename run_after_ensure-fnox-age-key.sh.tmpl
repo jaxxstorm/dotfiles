@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+FNOX_DIR="${HOME}/.config/fnox"
+FNOX_AGE_FILE="${FNOX_DIR}/age.txt"
+
+if [ -s "${FNOX_AGE_FILE}" ]; then
+  exit 0
+fi
+
+mkdir -p "${FNOX_DIR}"
+chmod 700 "${FNOX_DIR}"
+
+if [ -n "${FNOX_AGE_SECRET_KEY:-}" ]; then
+  printf '%s\n' "${FNOX_AGE_SECRET_KEY}" > "${FNOX_AGE_FILE}"
+  chmod 600 "${FNOX_AGE_FILE}"
+  exit 0
+fi
+
+if [ ! -t 0 ]; then
+  echo "fnox AGE secret key is not set; create ${FNOX_AGE_FILE} or export FNOX_AGE_SECRET_KEY before applying." >&2
+  exit 0
+fi
+
+printf 'Enter the fnox AGE secret key for %s: ' "${FNOX_AGE_FILE}" >&2
+trap 'stty echo' EXIT INT TERM
+stty -echo
+IFS= read -r FNOX_AGE_SECRET_KEY_INPUT
+stty echo
+trap - EXIT INT TERM
+printf '\n' >&2
+
+if [ -z "${FNOX_AGE_SECRET_KEY_INPUT}" ]; then
+  echo "No fnox AGE secret key provided; leaving ${FNOX_AGE_FILE} unset." >&2
+  exit 0
+fi
+
+printf '%s\n' "${FNOX_AGE_SECRET_KEY_INPUT}" > "${FNOX_AGE_FILE}"
+chmod 600 "${FNOX_AGE_FILE}"

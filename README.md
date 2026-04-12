@@ -16,6 +16,7 @@ On first apply, the repo bootstraps the base environment:
 - `starship` is installed into `~/.local/bin`
 - Oh My Zsh is installed if missing
 - tools declared in `~/.config/mise/config.toml` are installed by `mise`
+- if `~/.config/fnox/age.txt` is missing, setup prompts for the fnox AGE secret key and writes it locally with `0600` permissions
 
 ## Bootstrap A New Linux Box
 
@@ -73,5 +74,7 @@ export PATH="$HOME/.local/bin:$PATH"
 
 - The first bootstrap is expected to run before your final `zsh` environment exists, so running it from `bash` is normal.
 - `run_once_` scripts install core tools one time; `run_onchange_` scripts refresh shell integrations and install `mise` tools when tracked config changes.
+- `run_after_ensure-fnox-age-key.sh.tmpl` keeps `~/.config/fnox/age.txt` out of source control and prompts only when the file is missing.
+- Non-interactive bootstrap can preseed the secret with `FNOX_AGE_SECRET_KEY`.
 - `mise` tool versions are tracked in `dot_config/mise/config.toml`.
 - No secrets should ever be committed in plaintext to this repository.
