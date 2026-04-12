@@ -13,6 +13,10 @@ plugins=(git ssh-agent aws)
 
 export PATH="$HOME/.local/bin:$HOME/bin:$HOME/.cargo/bin:$HOME/.tfenv/bin:$HOME/.gobrew/current/bin:$HOME/.gobrew/bin:/opt/homebrew/bin:/opt/homebrew/lib/ruby/gems/3.1.0/bin:/opt/homebrew/opt/ruby/bin:$PATH"
 
+if [[ "$OSTYPE" == linux* ]]; then
+  export PATH="$HOME/.npm-global/bin:$PATH"
+fi
+
 # Starship
 if command -v starship >/dev/null 2>&1; then
   eval "$(starship init zsh)"
