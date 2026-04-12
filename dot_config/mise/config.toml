@@ -2,6 +2,7 @@
 age = "latest"
 fnox = "latest"
 gh = "latest"
+"github:jaxxstorm/tscli" = "latest"
 go = "latest"
 node = "latest"
 python = "3.11"
