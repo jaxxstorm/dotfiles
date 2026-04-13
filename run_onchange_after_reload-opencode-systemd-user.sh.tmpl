@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Re-run when the opencode user unit changes.
+# opencode-web.service sha256: {{ include "dot_config/systemd/user/opencode-web.service" | sha256sum }}
+
+if [ "{{ .chezmoi.os }}" != "linux" ]; then
+  exit 0
+fi
+
+if ! command -v systemctl >/dev/null 2>&1; then
+  exit 0
+fi
+
+UNIT_FILE="${HOME}/.config/systemd/user/opencode-web.service"
+if [ ! -f "${UNIT_FILE}" ]; then
+  exit 0
+fi
+
+if ! systemctl --user daemon-reload; then
+  echo "systemctl --user daemon-reload failed; reload the user manager manually once the session is available." >&2
+fi

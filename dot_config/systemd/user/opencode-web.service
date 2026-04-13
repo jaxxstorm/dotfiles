@@ -8,7 +8,7 @@ Type=simple
 WorkingDirectory=%h
 Environment=HOME=%h
 Environment=XDG_CONFIG_HOME=%h/.config
-ExecStart=%h/.opencode/bin/opencode web --hostname 0.0.0.0
+ExecStart=opencode web --hostname 0.0.0.0
 Restart=on-failure
 RestartSec=5
 
