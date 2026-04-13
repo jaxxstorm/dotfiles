@@ -1,12 +1,12 @@
 {{- $gpgPath := lookPath "gpg" -}}
 {{- $signingKey := "" -}}
 {{- if $gpgPath -}}
-{{- $gpgOutput := output "sh" "-c" (printf "%s --list-keys --with-colons lee@leebriggs.co.uk 2>/dev/null || true" $gpgPath) -}}
+{{- $gpgOutput := output "sh" "-c" (printf "%s --list-secret-keys --keyid-format LONG --with-colons lee@leebriggs.co.uk 2>/dev/null || true" $gpgPath) -}}
 {{- range splitList "\n" $gpgOutput -}}
-{{- if and (eq $signingKey "") (hasPrefix "fpr:" .) -}}
+{{- if and (eq $signingKey "") (hasPrefix "sec:" .) -}}
 {{- $fields := splitList ":" . -}}
-{{- if ge (len $fields) 10 -}}
-{{- $signingKey = index $fields 9 -}}
+{{- if ge (len $fields) 5 -}}
+{{- $signingKey = index $fields 4 -}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
