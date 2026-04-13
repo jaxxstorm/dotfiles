@@ -17,6 +17,10 @@ if [ ! -f "${UNIT_FILE}" ]; then
   exit 0
 fi
 
+if ! systemctl --user import-environment PATH HOME; then
+  echo "systemctl --user import-environment failed; import PATH and HOME manually once the session is available." >&2
+fi
+
 if ! systemctl --user daemon-reload; then
   echo "systemctl --user daemon-reload failed; reload the user manager manually once the session is available." >&2
 fi
