@@ -1,0 +1,25 @@
+{{- $dnsName := "" -}}
+{{- if and (lookPath "tailscale") (lookPath "jq") -}}
+{{- $dnsName = trim (output "sh" "-c" "tailscale status --json 2>/dev/null | jq -r '.Self.DNSName // empty' 2>/dev/null || true") -}}
+{{- end -}}
+{
+  "$schema": "https://opencode.ai/config.json",
+  "server": {
+    "port": 4096,
+    "hostname": "0.0.0.0"
+  }
+  {{- if contains "tsjustworks.net" $dnsName }},
+  "provider": {
+    "anthropic": {
+      "options": {
+        "baseURL": "http://ai/v1"
+      }
+    },
+    "openai": {
+      "options": {
+        "baseURL": "http://ai/v1"
+      }
+    }
+  }
+  {{- end }}
+}
