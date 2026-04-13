@@ -8,7 +8,7 @@ Type=simple
 WorkingDirectory=%h
 Environment=HOME=%h
 Environment=XDG_CONFIG_HOME=%h/.config
-ExecStart=opencode web --hostname 0.0.0.0
+ExecStart=%h/.local/share/mise/shims/opencode web
 Restart=on-failure
 RestartSec=5
 
