@@ -1,5 +1,4 @@
 format = """
-[](fg:#3A86FF)\
 $hostname\
 $username\
 [](bg:#DA627D fg:#9A348E)\
@@ -32,17 +31,16 @@ $aws\
 # Disable the blank line at the start of the prompt
 add_newline = false
 
-# You can also replace your username with a neat symbol like  to save some space
+[hostname]
+ssh_only = true
+trim_at = "."
+format = "[](fg:#3A86FF)[ $hostname ](bg:#3A86FF fg:#ffffff)[](fg:#3A86FF bg:#9A348E)"
+
 [username]
 show_always = true
 style_user = "bg:#9A348E"
 style_root = "bg:#9A348E"
-format = '[$user ]($style)'
-
-[hostname]
-ssh_only = true
-trim_at = "."
-format = "[ $hostname ](bg:#3A86FF fg:#ffffff)"
+format = '[ $user ]($style)'
 
 [directory]
 style = "bg:#DA627D"
