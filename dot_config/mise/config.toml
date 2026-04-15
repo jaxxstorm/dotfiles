@@ -2,7 +2,7 @@
 age = "latest"
 fnox = "latest"
 gh = "latest"
-"github:jaxxstorm/tscli" = "v0.5.2"
+"github:jaxxstorm/tscli" = "v0.6.1"
 go = "latest"
 node = "latest"
 opencode = "latest"
