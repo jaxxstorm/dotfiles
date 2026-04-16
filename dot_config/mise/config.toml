@@ -1,9 +1,13 @@
 [tools]
 age = "latest"
+bat = "latest"
+delta = "latest"
+eza = "latest"
 fnox = "latest"
 gh = "latest"
 "github:jaxxstorm/tscli" = "v0.6.1"
 go = "latest"
+jq = "latest"
 node = "latest"
 op = "latest"
 opencode = "latest"
