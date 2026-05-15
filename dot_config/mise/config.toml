@@ -5,12 +5,17 @@ delta = "latest"
 eza = "latest"
 fnox = "latest"
 gh = "latest"
+"github:abyss/go-awsp" = "latest"
 "github:jaxxstorm/tscli" = "v0.8.0"
 go = "latest"
 jq = "latest"
 node = "latest"
 op = "latest"
-opencode = "latest"
+opencode = "1.14.30"
 python = "3.11"
 rg = "latest"
 uv = "latest"
+yarn = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["node", "python"]
