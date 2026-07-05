@@ -9,7 +9,7 @@ Rules:
 - If a PR number is provided, run `gh-pr-reviews <number>`.
 - If a repository is provided, run `gh-pr-reviews -R owner/repo <number>`.
 - If no PR number is provided, run `gh-pr-reviews` from the current repository.
-- If authentication fails or private comments are missing, retry once with `gh-pr-reviews -a ...`.
+- Authentication uses `GH_TOKEN`, `GITHUB_TOKEN`, or `gh auth token` automatically.
 - Summarize actionable feedback first, grouped by file or review thread when possible.
 - Include review states and URLs that matter for follow-up.
 - For fix/address requests, separate actionable comments from stale or non-actionable discussion before editing.

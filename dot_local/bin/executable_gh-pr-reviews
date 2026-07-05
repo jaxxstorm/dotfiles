@@ -5,7 +5,7 @@ gh-pr-reviews() {
   setopt err_return pipe_fail no_unset extended_glob
 
   local -a req_opts args api
-  local repo="" id opt GH_TOKEN_LOCAL
+  local repo="" id opt GH_TOKEN_LOCAL auth_requested=0
 
   req_opts=(
     --retry-all-errors
@@ -20,17 +20,7 @@ gh-pr-reviews() {
   while getopts "haR:" opt; do
     case "$opt" in
       a)
-        if [[ -z "${GH_TOKEN:-}" ]]; then
-          GH_TOKEN_LOCAL="$(
-            grep -oE 'oauth_token: *.*' ~/.config/gh/hosts.yml |
-              sed 's/oauth_token: *//' |
-              tail -n1
-          )"
-        else
-          GH_TOKEN_LOCAL="$GH_TOKEN"
-        fi
-
-        req_opts+=(-H "Authorization: Bearer ${GH_TOKEN_LOCAL}")
+        auth_requested=1
         ;;
 
       R)
@@ -43,7 +33,7 @@ gh-pr-reviews() {
         echo
         printf '%s\n' \
           'Options:' \
-          '    -a                 try using GH_TOKEN / gh hosts.yml token' \
+          '    -a                 accepted for compatibility; auth is automatic' \
           '    -R owner/repo       repository, defaults to gh repo set-default -v' \
           '    -h                 show help'
         return 0
@@ -76,6 +66,17 @@ gh-pr-reviews() {
   fi
 
   hash gh curl jq || return
+
+  GH_TOKEN_LOCAL="${GH_TOKEN:-${GITHUB_TOKEN:-}}"
+  if [[ -z "$GH_TOKEN_LOCAL" ]]; then
+    GH_TOKEN_LOCAL="$(gh auth token 2>/dev/null || true)"
+  fi
+  if [[ -n "$GH_TOKEN_LOCAL" ]]; then
+    req_opts+=(-H "Authorization: Bearer ${GH_TOKEN_LOCAL}")
+  elif (( auth_requested )); then
+    printf '%s: no GitHub token found in GH_TOKEN, GITHUB_TOKEN, or gh auth\n' "$0" >&2
+    return 2
+  fi
 
   api=(
     "https://api.github.com/repos/$repo/issues/$id/comments"
