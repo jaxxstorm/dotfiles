@@ -5,7 +5,21 @@ gh-pr-reviews() {
   setopt err_return pipe_fail no_unset extended_glob
 
   local -a req_opts args api
-  local repo="" id opt GH_TOKEN_LOCAL auth_requested=0
+  local repo="" id opt GH_TOKEN_LOCAL auth_requested=0 remote
+
+  normalize_repo() {
+    local value="$1"
+
+    value="${value##(http(|s)://)#(www.)#github.com/}"
+    value="${value##git@github.com:}"
+    value="${value##ssh://git@github.com/}"
+    value="${value%.git}"
+    value="${value%/}"
+
+    if [[ "$value" == */* && "$value" != *github.com* ]]; then
+      printf '%s\n' "$value"
+    fi
+  }
 
   req_opts=(
     --retry-all-errors
@@ -34,7 +48,7 @@ gh-pr-reviews() {
         printf '%s\n' \
           'Options:' \
           '    -a                 accepted for compatibility; auth is automatic' \
-          '    -R owner/repo       repository, defaults to gh repo set-default -v' \
+          '    -R owner/repo       repository, defaults to git origin or gh default' \
           '    -h                 show help'
         return 0
         ;;
@@ -48,24 +62,35 @@ gh-pr-reviews() {
 
   shift $((OPTIND - 1))
 
+  hash gh git curl jq || return
+
   if (( $# > 1 )); then
     printf '%s: unexpected arg %q\n' "$0" "$2" >&2
     return 2
   fi
 
-  repo="${repo##(http(|s)://)#(www.)#github.com/}"
+  repo="$(normalize_repo "$repo")"
 
   if [[ -z "$repo" ]]; then
-    repo="$(gh repo set-default -v)" || return
+    remote="$(git remote get-url origin 2>/dev/null || true)"
+    repo="$(normalize_repo "$remote")"
+  fi
+
+  if [[ -z "$repo" ]]; then
+    repo="$(gh repo set-default -v 2>/dev/null || true)"
+    repo="$(normalize_repo "$repo")"
+  fi
+
+  if [[ -z "$repo" ]]; then
+    printf '%s: could not infer GitHub repository; pass -R owner/repo\n' "$0" >&2
+    return 2
   fi
 
   if (( $# == 1 )); then
     id="$1"
   else
-    id="$(gh pr view --json number | jq .number)" || return
+    id="$(gh pr view --repo "$repo" --json number --jq .number)" || return
   fi
-
-  hash gh curl jq || return
 
   GH_TOKEN_LOCAL="${GH_TOKEN:-${GITHUB_TOKEN:-}}"
   if [[ -z "$GH_TOKEN_LOCAL" ]]; then
