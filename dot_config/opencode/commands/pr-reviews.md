@@ -1,9 +1,9 @@
 ---
-description: Inspect and address GitHub PR comments and reviews
+description: Inspect and address GitHub PR comments, reviews, and failed checks
 agent: build
 ---
 
-Use `gh-pr-reviews` to inspect pull request comments, inline review comments, and submitted reviews. When the prompt asks to fix, address, handle, or resolve feedback, implement the requested changes instead of only summarizing them.
+Use `gh-pr-reviews` to inspect pull request comments, inline review comments, submitted reviews, and failed checks. When the prompt asks to fix, address, handle, or resolve feedback, implement the requested changes or check fixes instead of only summarizing them.
 
 Rules:
 - If a PR number is provided, run `gh-pr-reviews <number>`.
@@ -11,6 +11,7 @@ Rules:
 - If no PR number is provided, run `gh-pr-reviews` from the current repository.
 - Authentication uses `GH_TOKEN`, `GITHUB_TOKEN`, or `gh auth token` automatically.
 - Summarize actionable feedback first, grouped by file or review thread when possible.
+- Treat failed check output as actionable feedback when it identifies a concrete failure.
 - Include review states and URLs that matter for follow-up.
 - For fix/address requests, separate actionable comments from stale or non-actionable discussion before editing.
 - Inspect referenced files and surrounding code before making changes.

@@ -5,7 +5,7 @@ gh-pr-reviews() {
   setopt err_return pipe_fail no_unset extended_glob
 
   local -a req_opts args api
-  local repo="" id opt GH_TOKEN_LOCAL auth_requested=0 remote
+  local repo="" id opt GH_TOKEN_LOCAL auth_requested=0 remote head_sha
 
   normalize_repo() {
     local value="$1"
@@ -103,12 +103,21 @@ gh-pr-reviews() {
     return 2
   fi
 
+  head_sha="$(gh pr view "$id" --repo "$repo" --json headRefOid --jq .headRefOid 2>/dev/null || true)"
+
   api=(
     "https://api.github.com/repos/$repo/issues/$id/comments"
     "https://api.github.com/repos/$repo/pulls/$id"
     "https://api.github.com/repos/$repo/pulls/$id/comments"
     "https://api.github.com/repos/$repo/pulls/$id/reviews"
   )
+
+  if [[ -n "$head_sha" ]]; then
+    api+=(
+      "https://api.github.com/repos/$repo/commits/$head_sha/check-runs?per_page=100"
+      "https://api.github.com/repos/$repo/commits/$head_sha/status"
+    )
+  fi
 
   printf 'api:'
   printf ' %q' "${api[@]}"
@@ -174,11 +183,48 @@ def expected($ty):
   end
   ;
 def pull_body_pack:
-  if has("body")? // false then
+  if type == "array" then
+    .
+  elif has("body")? // false then
     if has("title") then .body = .title+"\n\n"+.body end |
     if .merged then .state = "merged" end |
     if .draft and .state == "open" then .state = "draft" end |
     [.]
+  end;
+def check_runs_pack:
+  [.check_runs[]
+  | select(.status == "completed" and (.conclusion | IN("success", "skipped", "neutral") | not))
+  | {
+      user: (.app.slug // .app.name // "check"),
+      body: ([
+        "Check `\(.name)` finished with `\(.conclusion // .status)`.",
+        (.output.title // empty),
+        (.output.summary // empty),
+        (.output.text // empty)
+      ] | map(select(. != null and . != "")) | join("\n\n")),
+      created_at: (.completed_at // .started_at // .created_at // "9999-12-31T23:59:59Z"),
+      updated_at: .completed_at,
+      html_url: (.details_url // .html_url // ""),
+      state: "CHECK_FAILURE"
+    }];
+def statuses_pack:
+  [.statuses[]
+  | select(.state | IN("failure", "error"))
+  | {
+      user: "status",
+      body: ([
+        "Status `\(.context)` is `\(.state)`.",
+        (.description // empty)
+      ] | map(select(. != null and . != "")) | join("\n\n")),
+      created_at: (.updated_at // .created_at // "9999-12-31T23:59:59Z"),
+      updated_at,
+      html_url: (.target_url // ""),
+      state: "STATUS_FAILURE"
+    }];
+def pack:
+  if type == "object" and has("check_runs") then check_runs_pack
+  elif type == "object" and has("statuses") then statuses_pack
+  else pull_body_pack
   end;
 def patch_formatter:
   expected("array") |
@@ -225,7 +271,9 @@ def association:
 def state:
   .state | if . then
     " "+(ascii_downcase
-      | if endswith("requested") then
+      | if endswith("failure") or endswith("error") or endswith("cancelled") or endswith("timed_out") then
+        csim(31)+.+csim(39)
+      elif endswith("requested") then
         csim(31)+.+csim(39)
       elif endswith("approved") then
         csim(32)+.+csim(39)
@@ -253,9 +301,9 @@ def meta:
   | join(csim+" ")+csim
   ;
 "\u0000topLevel" as $top |
-reduce (inputs | pull_body_pack | expected("array"))[] as $review ({};
+reduce (inputs | pack | expected("array"))[] as $review ({};
   .[$review.diff_hunk // $top] += [$review | {
-    user: .user.login,
+    user: (.user.login // .user // "github"),
     body,
     created_at: (.created_at // .submitted_at // "9999-12-31T23:59:59Z"),
     updated_at,
