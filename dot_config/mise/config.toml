@@ -1,6 +1,7 @@
 [tools]
 age = "latest"
 bat = "latest"
+bun = "latest"
 delta = "latest"
 eza = "latest"
 fnox = "latest"
