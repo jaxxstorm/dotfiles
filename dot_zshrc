@@ -76,7 +76,7 @@ pi() {
 
 # Use the OpenCode profile matching the active Tailscale account, or base config otherwise.
 opencode() {
-  local account profile="${OPENCODE_PROFILE:-}" config
+  local account profile="${OPENCODE_PROFILE:-${OC_PROFILE:-}}" config
 
   if [[ -z "$profile" ]]; then
     profile="personal"

@@ -1,0 +1,3 @@
+# ~/.config/mise/config.tsjustworks.toml
+[env]
+PI_PROFILE = "tsjustworks"
