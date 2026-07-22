@@ -8,6 +8,24 @@
       "headers": {
         "Authorization": "{env:ONELEET_SERVICE_KEY}"
       }
+    },
+    "aws": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "mcp-proxy-for-aws==1.6.2",
+        "https://aws-mcp.us-east-1.api.aws/mcp",
+        "--profile",
+        "ignistech-development",
+        "ignistech-production",
+        "ignistech-mgmt",
+        "ignistech-shared",
+        "--region",
+        "us-east-1",
+        "--read-only"
+      ],
+      "enabled": true,
+      "timeout": 100000
     }
   }
 }
