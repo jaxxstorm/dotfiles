@@ -98,13 +98,8 @@ opencode() {
 
   config="$HOME/.config/opencode/profiles/$profile.jsonc"
   if [[ -f "$config" ]]; then
-    (
-      export OPENCODE_CONFIG="$config"
-      exec mise -E "$profile" exec -- fnox --profile "$profile" --no-defaults exec -- opencode "$@"
-    )
+    OPENCODE_CONFIG="$config" mise -E "$profile" exec -- fnox --profile "$profile" --no-defaults exec -- opencode "$@"
   else
-    (
-      exec mise -E "$profile" exec -- opencode "$@"
-    )
+    mise -E "$profile" exec -- opencode "$@"
   fi
 }
