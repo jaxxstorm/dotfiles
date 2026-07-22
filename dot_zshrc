@@ -73,3 +73,38 @@ pi() {
     exec mise exec -- pi "$@"
   )
 }
+
+# Use the OpenCode profile matching the active Tailscale account, or base config otherwise.
+opencode() {
+  local account profile="${OPENCODE_PROFILE:-}" config
+
+  if [[ -z "$profile" ]]; then
+    profile="personal"
+
+    if command -v tailscale >/dev/null 2>&1; then
+      account=$(tailscale switch --list 2>/dev/null | awk '
+        NR > 1 && $NF ~ /\*$/ {
+          sub(/\*$/, "", $NF)
+          print $NF
+          exit
+        }
+      ')
+
+      if [[ -n "$account" && -f "$HOME/.config/opencode/profiles/$account.jsonc" ]]; then
+        profile="$account"
+      fi
+    fi
+  fi
+
+  config="$HOME/.config/opencode/profiles/$profile.jsonc"
+  if [[ -f "$config" ]]; then
+    (
+      export OPENCODE_CONFIG="$config"
+      exec mise -E "$profile" exec -- fnox --profile "$profile" --no-defaults exec -- opencode "$@"
+    )
+  else
+    (
+      exec mise -E "$profile" exec -- opencode "$@"
+    )
+  fi
+}

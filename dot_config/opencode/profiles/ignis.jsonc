@@ -1,0 +1,13 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "oneleet": {
+      "type": "remote",
+      "url": "https://api.oneleet.com/mcp",
+      "enabled": true,
+      "headers": {
+        "Authorization": "{env:ONELEET_SERVICE_KEY}"
+      }
+    }
+  }
+}

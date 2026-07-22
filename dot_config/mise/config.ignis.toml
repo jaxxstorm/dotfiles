@@ -1,0 +1,3 @@
+# ~/.config/mise/config.ignis.toml
+[env]
+PI_PROFILE = "ignis"
