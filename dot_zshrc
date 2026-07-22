@@ -45,3 +45,27 @@ export EDITOR=vim
 if command -v mise >/dev/null 2>&1; then
   eval "$(mise activate zsh)"
 fi
+
+# Use the pi profile matching the active Tailscale account, or personal otherwise.
+pi() {
+  local account profile="personal"
+
+  if command -v tailscale >/dev/null 2>&1; then
+    account=$(tailscale switch --list 2>/dev/null | awk '
+      NR > 1 && $NF ~ /\*$/ {
+        sub(/\*$/, "", $NF)
+        print $NF
+        exit
+      }
+    ')
+
+    if [[ -n "$account" && -d "$HOME/.pi/profiles/$account" ]]; then
+      profile="$account"
+    fi
+  fi
+
+  (
+    export PI_CODING_AGENT_DIR="$HOME/.pi/profiles/$profile"
+    exec mise exec -- pi "$@"
+  )
+}
