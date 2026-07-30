@@ -1,12 +1,12 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "enabled_providers": ["tsjustworks"],
-  "model": "tsjustworks/gpt-5.6",
-  "small_model": "tsjustworks/gpt-5.6-luna",
+  "enabled_providers": ["tsjustworks-openai", "tsjustworks-anthropic", "tsjustworks"],
+  "model": "tsjustworks-openai/gpt-5.6",
+  "small_model": "tsjustworks-openai/gpt-5.6-luna",
   "provider": {
-    "tsjustworks": {
+    "tsjustworks-openai": {
       "npm": "@ai-sdk/openai",
-      "name": "Tailscale Justworks",
+      "name": "Tailscale Justworks - OpenAI",
       "options": {
         "baseURL": "http://ai.tsjustworks.ts.net/v1",
         "apiKey": "tsjustworks"
@@ -14,20 +14,6 @@
       "models": {
         "glm-5.2": {},
         "kimi-k2.7-code": {},
-        "claude-fable-5": {},
-        "claude-haiku-4-5": {},
-        "claude-opus-4-6": {},
-        "claude-opus-4-7": {},
-        "claude-opus-4-8": {},
-        "claude-sonnet-4-6": {},
-        "claude-sonnet-5": {},
-        "us.anthropic.claude-haiku-4-5-20251001-v1:0": {},
-        "us.anthropic.claude-opus-4-6-v1": {},
-        "us.anthropic.claude-opus-4-7": {},
-        "us.anthropic.claude-opus-4-8": {},
-        "anthropic.claude-haiku-4-5": {},
-        "anthropic.claude-opus-4-7": {},
-        "anthropic.claude-opus-4-8": {},
         "zai.glm-5": {},
         "openai.gpt-5.4": {},
         "openai.gpt-5.5": {},
@@ -35,6 +21,91 @@
         "gpt-5.6-luna": {},
         "gpt-5.6-sol": {},
         "gpt-5.6-terra": {}
+      }
+    },
+    "tsjustworks-anthropic": {
+      "npm": "@ai-sdk/anthropic",
+      "name": "Tailscale Justworks - Anthropic",
+      "options": {
+        "baseURL": "http://ai.tsjustworks.ts.net/v1",
+        "apiKey": "tsjustworks"
+      },
+      "models": {
+        "claude-fable-5": {},
+        "claude-haiku-4-5": {},
+        "claude-opus-4-6": {},
+        "claude-opus-4-7": {},
+        "claude-opus-4-8": {},
+        "claude-sonnet-4-6": {},
+        "claude-sonnet-5": {},
+        "anthropic.claude-haiku-4-5": {},
+        "anthropic.claude-opus-4-7": {},
+        "anthropic.claude-opus-4-8": {},
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0": {},
+        "us.anthropic.claude-opus-4-6-v1": {},
+        "us.anthropic.claude-opus-4-7": {},
+        "us.anthropic.claude-opus-4-8": {}
+      }
+    },
+    "tsjustworks": {
+      "npm": "@ai-sdk/openai",
+      "name": "Tailscale Justworks - Catch-all",
+      "options": {
+        "baseURL": "http://ai.tsjustworks.ts.net/v1",
+        "apiKey": "tsjustworks"
+      },
+      "models": {
+        "glm-5.2": {},
+        "kimi-k2.7-code": {},
+        "zai.glm-5": {},
+        "openai.gpt-5.4": {},
+        "openai.gpt-5.5": {},
+        "gpt-5.6": {},
+        "gpt-5.6-luna": {},
+        "gpt-5.6-sol": {},
+        "gpt-5.6-terra": {},
+        "claude-fable-5": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "claude-haiku-4-5": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "claude-opus-4-6": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "claude-opus-4-7": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "claude-opus-4-8": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "claude-sonnet-4-6": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "claude-sonnet-5": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "anthropic.claude-haiku-4-5": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "anthropic.claude-opus-4-7": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "anthropic.claude-opus-4-8": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "us.anthropic.claude-opus-4-6-v1": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "us.anthropic.claude-opus-4-7": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        },
+        "us.anthropic.claude-opus-4-8": {
+          "provider": { "npm": "@ai-sdk/anthropic" }
+        }
       }
     }
   }
