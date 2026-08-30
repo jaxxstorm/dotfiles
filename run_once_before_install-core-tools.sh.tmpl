@@ -11,10 +11,27 @@ fi
 
 # Install Homebrew on macOS if missing.
 {{- if eq .chezmoi.os "darwin" }}
-if ! command -v brew >/dev/null 2>&1; then
+if command -v brew >/dev/null 2>&1; then
+  BREW="$(command -v brew)"
+elif [ -x /opt/homebrew/bin/brew ]; then
+  BREW=/opt/homebrew/bin/brew
+elif [ -x /usr/local/bin/brew ]; then
+  BREW=/usr/local/bin/brew
+else
   env -u NONINTERACTIVE /bin/bash -c \
     "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  if [ -x /opt/homebrew/bin/brew ]; then
+    BREW=/opt/homebrew/bin/brew
+  elif [ -x /usr/local/bin/brew ]; then
+    BREW=/usr/local/bin/brew
+  else
+    echo "Homebrew installation completed but brew was not found." >&2
+    exit 1
+  fi
 fi
+
+# Make Homebrew available to the rest of this non-login installer.
+eval "$(\"$BREW\" shellenv)"
 
 # Install GnuPG and macOS pinentry support if missing.
 if ! command -v gpgconf >/dev/null 2>&1; then
