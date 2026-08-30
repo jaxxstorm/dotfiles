@@ -23,9 +23,7 @@ if command -v starship >/dev/null 2>&1; then
 fi
 
 # awsp
-awsp() {
-  source "$(mise where github:abyss/go-awsp)/_source-awsp.sh"
-}
+alias awsp='. awsp'
 
 # GPG
 # Add the following to your shell init to set up gpg-agent automatically for every shell
