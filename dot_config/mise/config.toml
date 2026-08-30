@@ -1,5 +1,6 @@
 [tools]
 age = "latest"
+aws-cli = { version = "latest", symlink_bins = "true" }
 bat = "latest"
 bun = "latest"
 delta = "latest"
