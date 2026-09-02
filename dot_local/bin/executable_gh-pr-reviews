@@ -4,8 +4,19 @@ gh-pr-reviews() {
   emulate -L zsh
   setopt err_return pipe_fail no_unset extended_glob
 
-  local -a req_opts args api
-  local repo="" id opt GH_TOKEN_LOCAL auth_requested=0 remote head_sha
+  local -a req_opts api
+  local repo="" id selector GH_TOKEN_LOCAL auth_requested=0 remote branch head_sha command_name="${0:t}"
+
+  usage() {
+    printf 'Usage: %s [options] [number | url | branch]\n' "$command_name"
+    printf '%s\n' \
+      'Show GitHub pull request reviews and failed checks.' \
+      '' \
+      'Options:' \
+      '  -a, --auth            require an available GitHub token' \
+      '  -R, --repo owner/repo repository, defaults to git origin or gh default' \
+      '  -h, --help            show help'
+  }
 
   normalize_repo() {
     local value="$1"
@@ -16,7 +27,7 @@ gh-pr-reviews() {
     value="${value%.git}"
     value="${value%/}"
 
-    if [[ "$value" == */* && "$value" != *github.com* ]]; then
+    if [[ "$value" == [^/]##/[^/]## && "$value" != */*/* ]]; then
       printf '%s\n' "$value"
     fi
   }
@@ -29,38 +40,45 @@ gh-pr-reviews() {
     -H "X-GitHub-Api-Version: 2022-11-28"
   )
 
-  args=()
-
-  while getopts "haR:" opt; do
-    case "$opt" in
-      a)
+  while (( $# )); do
+    case "$1" in
+      -a|--auth)
         auth_requested=1
         ;;
-
-      R)
-        repo="$OPTARG"
+      -R|--repo)
+        if (( $# < 2 )); then
+          printf '%s: %s requires owner/repo\n' "$0" "$1" >&2
+          return 2
+        fi
+        repo="$2"
+        shift
         ;;
-
-      h)
-        printf 'Usage: %s [Options] [number]\n' "${0:t}"
-        echo 'show github pull request reviews'
-        echo
-        printf '%s\n' \
-          'Options:' \
-          '    -a                 accepted for compatibility; auth is automatic' \
-          '    -R owner/repo       repository, defaults to git origin or gh default' \
-          '    -h                 show help'
+      --repo=*)
+        repo="${1#--repo=}"
+        if [[ -z "$repo" ]]; then
+          printf '%s: --repo requires owner/repo\n' "$0" >&2
+          return 2
+        fi
+        ;;
+      -h|--help)
+        usage
         return 0
         ;;
-
-      \?)
-        printf '%s: parse args failed\n' "$0" >&2
+      --)
+        shift
+        break
+        ;;
+      -*)
+        printf '%s: unknown option %s\n' "$0" "$1" >&2
+        usage >&2
         return 2
         ;;
+      *)
+        break
+        ;;
     esac
+    shift
   done
-
-  shift $((OPTIND - 1))
 
   hash gh git curl jq || return
 
@@ -69,7 +87,13 @@ gh-pr-reviews() {
     return 2
   fi
 
-  repo="$(normalize_repo "$repo")"
+  if [[ -n "$repo" ]]; then
+    repo="$(normalize_repo "$repo")"
+    if [[ -z "$repo" ]]; then
+      printf '%s: repository must be owner/repo\n' "$0" >&2
+      return 2
+    fi
+  fi
 
   if [[ -z "$repo" ]]; then
     remote="$(git remote get-url origin 2>/dev/null || true)"
@@ -87,9 +111,14 @@ gh-pr-reviews() {
   fi
 
   if (( $# == 1 )); then
-    id="$1"
+    selector="$1"
   else
-    id="$(gh pr view --repo "$repo" --json number --jq .number)" || return
+    branch="$(git symbolic-ref --quiet --short HEAD 2>/dev/null || true)"
+    if [[ -z "$branch" ]]; then
+      printf '%s: could not infer a pull request from a detached HEAD; pass a PR number\n' "$0" >&2
+      return 2
+    fi
+    selector="$branch"
   fi
 
   GH_TOKEN_LOCAL="${GH_TOKEN:-${GITHUB_TOKEN:-}}"
@@ -103,7 +132,17 @@ gh-pr-reviews() {
     return 2
   fi
 
-  head_sha="$(gh pr view "$id" --repo "$repo" --json headRefOid --jq .headRefOid 2>/dev/null || true)"
+  local pr_data
+  pr_data="$(gh pr view "$selector" --repo "$repo" --json number,headRefOid --jq '[.number, .headRefOid] | @tsv')" || {
+    printf '%s: could not resolve pull request %q in %s\n' "$0" "$selector" "$repo" >&2
+    return 1
+  }
+  IFS=$'\t' read -r id head_sha <<< "$pr_data"
+
+  if [[ -z "$id" || "$id" != <-> ]]; then
+    printf '%s: GitHub returned an invalid pull request number\n' "$0" >&2
+    return 1
+  fi
 
   api=(
     "https://api.github.com/repos/$repo/issues/$id/comments"
@@ -119,11 +158,7 @@ gh-pr-reviews() {
     )
   fi
 
-  printf 'api:'
-  printf ' %q' "${api[@]}"
-  printf '\n'
-
-  curl --no-progress-meter "${req_opts[@]}" -- "${api[@]}" |
+  curl --fail --no-progress-meter "${req_opts[@]}" -- "${api[@]}" |
     jq -nr '
 {
   "+1":       "👍",
@@ -190,6 +225,10 @@ def pull_body_pack:
     if .merged then .state = "merged" end |
     if .draft and .state == "open" then .state = "draft" end |
     [.]
+  elif type == "object" and has("message") then
+    error("GitHub API error: \(.message)")
+  else
+    []
   end;
 def check_runs_pack:
   [.check_runs[]
@@ -303,7 +342,7 @@ def meta:
 "\u0000topLevel" as $top |
 reduce (inputs | pack | expected("array"))[] as $review ({};
   .[$review.diff_hunk // $top] += [$review | {
-    user: (.user.login // .user // "github"),
+    user: (if (.user | type) == "object" then .user.login // "github" elif (.user | type) == "string" then .user else "github" end),
     body,
     created_at: (.created_at // .submitted_at // "9999-12-31T23:59:59Z"),
     updated_at,
