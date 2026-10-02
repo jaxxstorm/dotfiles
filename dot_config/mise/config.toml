@@ -1,3 +1,6 @@
+[env]
+OPENCODE_APERTURE_HOST = "https://ai.lbr.ts.net"
+
 [tools]
 actionlint = "latest"
 age = "latest"
@@ -25,4 +28,3 @@ yarn = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["node", "python"]
-
