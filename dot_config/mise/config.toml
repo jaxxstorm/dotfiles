@@ -1,6 +1,3 @@
-[env]
-OPENCODE_APERTURE_HOST = "https://ai.lbr.ts.net"
-
 [tools]
 actionlint = "latest"
 age = "latest"
