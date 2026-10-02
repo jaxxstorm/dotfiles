@@ -21,8 +21,7 @@
         "ignistech-mgmt",
         "ignistech-shared",
         "--region",
-        "us-east-1",
-        "--read-only"
+        "us-east-1"
       ],
       "enabled": true,
       "timeout": 100000
