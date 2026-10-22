@@ -71,3 +71,39 @@ pi() {
     exec mise exec -- pi "$@"
   )
 }
+
+# Use a private OpenCode server for Ignis; all other profiles use the shared service.
+opencode() {
+  local account profile="${OPENCODE_PROFILE:-${OC_PROFILE:-}}" config
+
+  if [[ -z "$profile" ]]; then
+    profile="personal"
+
+    if command -v tailscale >/dev/null 2>&1; then
+      account=$(tailscale switch --list 2>/dev/null | awk '
+        NR > 1 && $NF ~ /\*$/ {
+          sub(/\*$/, "", $NF)
+          print $NF
+          exit
+        }
+      ')
+
+      if [[ -n "$account" ]]; then
+        profile="$account"
+      fi
+    fi
+  fi
+
+  if [[ "$profile" == "ignis" ]]; then
+    config="$HOME/.config/opencode/profiles/ignis.jsonc"
+    if [[ ! -f "$config" ]]; then
+      print -u2 "OpenCode Ignis profile not found: $config"
+      return 1
+    fi
+
+    OPENCODE_CONFIG="$config" mise -E "$profile" exec -- \
+      fnox --profile "$profile" --no-defaults exec -- opencode --standalone "$@"
+  else
+    command opencode "$@"
+  fi
+}
